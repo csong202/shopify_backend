@@ -53,9 +53,23 @@ const project_delete = (req, res) => {
     });
 };
 
+// query
+const project_query = (req, res) => {
+  const field = req.params.field;
+  const value = req.params.value;
+  Project.find({ [field]: value })
+    .then((result) => {
+      res.status(200).send(result);
+    })
+    .catch((err) => {
+      res.status(400).send(err);
+    });
+};
+
 module.exports = {
   project_get_all,
   project_get_byID,
   project_create,
   project_delete,
+  project_query,
 };
