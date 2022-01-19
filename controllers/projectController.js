@@ -11,7 +11,7 @@ const project_get_all = (req, res) => {
     .catch((err) => {
       res
         .status(400)
-        .send("Ther is an error in the server while loading projects");
+        .send("There is an error in the server while loading projects");
     });
 };
 
@@ -55,8 +55,7 @@ const project_delete = (req, res) => {
 
 // query
 const project_query = (req, res) => {
-  const field = req.params.field;
-  const value = req.params.value;
+  const { field, value } = req.params;
   Project.find({ [field]: value })
     .then((result) => {
       res.status(200).send(result);

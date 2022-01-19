@@ -23,11 +23,14 @@ const PORT = 8080;
 
 app.use(cors());
 
-app.get("/", (req, res) => res.send("Hello from homepage."));
+// app.get("/", (req, res) => res.send("INSTRUCTIONS\n\nCreating Inventory Items\npath = \n\nEditing Inventory Items\npath = /projects/edit/<id>\n\nDeleting Inventory Items\npath = /projects/delete/<id>\n\nViewing a List of Inventory Items\npath = /projects/"));
+app.get("/", (req, res) => {
+  res.sendFile("index.html", {root: __dirname})
+});
 app.listen(PORT, () =>
   console.log(`Server running on port: http://localhost:${PORT}`)
 );
 
 // parses the text as json and exposes the resulting object on req.body
 app.use(bodyParser.json());
-app.use("/projects", projectRoutes); // project routes
+app.use("/projects", projectRoutes);
