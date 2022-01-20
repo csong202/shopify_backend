@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
-const projectRoutes = require("./routes/projectRoutes");
+const itemRoutes = require("./routes/itemRoutes");
 const bodyParser = require("body-parser");
 
 // connecting to mongodb
@@ -32,4 +32,4 @@ app.listen(PORT, () =>
 
 // parses the text as json and exposes the resulting object on req.body
 app.use(bodyParser.json());
-app.use("/projects", projectRoutes);
+app.use("/items", itemRoutes);

@@ -1,9 +1,9 @@
 const req = require("express/lib/request");
-const { Project } = require("../models/project");
+const { Item } = require("../models/item");
 
-// list of projects that is stored inside mongoDB
-const project_get_all = (req, res) => {
-  Project.find() // uses Project schema to find() all projects t
+// list of items that is stored inside mongoDB
+const item_get_all = (req, res) => {
+  Item.find() // uses Item schema to find() all items t
     .sort({ createdAt: -1 }) // sort results by the createdAt tag (descending order, newly created first)
     .then((result) => {
       res.status(200).send(result);
@@ -11,15 +11,15 @@ const project_get_all = (req, res) => {
     .catch((err) => {
       res
         .status(400)
-        .send("There is an error in the server while loading projects");
+        .send("There is an error in the server while loading items");
     });
 };
 
 // get route
-const project_get_byID = (req, res) => {
+const item_get_byID = (req, res) => {
   // req is the input request sent from frontend
   const id = req.params.id;
-  Project.findById(id)
+  Item.findById(id)
     .then((result) => {
       res.status(200).send(result);
     })
@@ -29,9 +29,9 @@ const project_get_byID = (req, res) => {
 };
 
 // post
-const project_create = (req, res) => {
-  const project = new Project(req.body);
-  project
+const item_create = (req, res) => {
+  const item = new Item(req.body);
+  item
     .save()
     .then((result) => {
       res.status(201).send(result);
@@ -42,9 +42,9 @@ const project_create = (req, res) => {
 };
 
 // delete
-const project_delete = (req, res) => {
+const item_delete = (req, res) => {
   const id = req.params.id;
-  Project.findByIdAndRemove(id)
+  Item.findByIdAndRemove(id)
     .then((result) => {
       res.status(200).send(result);
       console.log("deleted: " + result);
@@ -52,14 +52,14 @@ const project_delete = (req, res) => {
     .catch((err) => {
       res.status(400).send(err);
     });
-  // fetch(`https://localhost:${8080}/projects/${id}`, { method: "DELETE" })
+  // fetch(`https://localhost:${8080}/items/${id}`, { method: "DELETE" })
   //   .then((response) => {
   //     return response.json();
   //   })
   //   .catch((error) => console.log(error));
   // $.ajax({
   //   type: "DELETE",
-  //   url: "http://localhost:8080/projects/" + id,
+  //   url: "http://localhost:8080/items/" + id,
   // }).done(function (result) {
   //   $("#json").html(JSON.stringify(result));
   //   var resultHtml = "Deleted";
@@ -68,9 +68,9 @@ const project_delete = (req, res) => {
 };
 
 // query
-const project_query = (req, res) => {
+const item_query = (req, res) => {
   const { field, value } = req.params;
-  Project.find({ [field]: value })
+  Item.find({ [field]: value })
     .then((result) => {
       res.status(200).send(result);
     })
@@ -80,10 +80,10 @@ const project_query = (req, res) => {
 };
 
 // edit
-const project_edit = (req, res) => {
+const item_edit = (req, res) => {
   const { id, field, value } = req.params;
   console.log({ "req.params": req.params });
-  Project.findByIdAndUpdate(id, { [field]: value }, (err, _result) => {
+  Item.findByIdAndUpdate(id, { [field]: value }, (err, _result) => {
     if (err) {
       // res.status(400).send(err);
       res
@@ -96,10 +96,10 @@ const project_edit = (req, res) => {
 };
 
 module.exports = {
-  project_get_all,
-  project_get_byID,
-  project_create,
-  project_delete,
-  project_query,
-  project_edit,
+  item_get_all,
+  item_get_byID,
+  item_create,
+  item_delete,
+  item_query,
+  item_edit,
 };
