@@ -65,10 +65,27 @@ const project_query = (req, res) => {
     });
 };
 
+// edit
+const project_edit = (req, res) => {
+  const { id, field, value } = req.params;
+  console.log({ "req.params": req.params });
+  Project.findByIdAndUpdate(id, { [field]: value }, (err, _result) => {
+    if (err) {
+      // res.status(400).send(err);
+      res
+        .status(400)
+        .send(`error! id = ${id}, field = ${field}, value = ${value}`);
+    } else {
+      res.status(200).send(`the ${field} is now ${value}`);
+    }
+  });
+};
+
 module.exports = {
   project_get_all,
   project_get_byID,
   project_create,
   project_delete,
   project_query,
+  project_edit,
 };
