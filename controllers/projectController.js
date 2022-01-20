@@ -44,13 +44,27 @@ const project_create = (req, res) => {
 // delete
 const project_delete = (req, res) => {
   const id = req.params.id;
-  Project.findByIdAndDelete(id)
+  Project.findByIdAndRemove(id)
     .then((result) => {
       res.status(200).send(result);
+      console.log("deleted: " + result);
     })
     .catch((err) => {
       res.status(400).send(err);
     });
+  // fetch(`https://localhost:${8080}/projects/${id}`, { method: "DELETE" })
+  //   .then((response) => {
+  //     return response.json();
+  //   })
+  //   .catch((error) => console.log(error));
+  // $.ajax({
+  //   type: "DELETE",
+  //   url: "http://localhost:8080/projects/" + id,
+  // }).done(function (result) {
+  //   $("#json").html(JSON.stringify(result));
+  //   var resultHtml = "Deleted";
+  //   $("#result").html(resultHtml);
+  // });
 };
 
 // query

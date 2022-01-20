@@ -7,7 +7,7 @@ router.post("/", projectController.project_create);
 // edit
 router.patch("/edit/:id/:field/:value", projectController.project_edit);
 // delete
-router.delete("/:id", projectController.project_delete);
+router.delete("/delete/:id", projectController.project_delete);
 // viewing items
 router.get("/", projectController.project_get_all);
 router.get("/:id", projectController.project_get_byID);

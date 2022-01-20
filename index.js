@@ -13,7 +13,7 @@ mongoose
     useUnifiedTopology: true,
     auth: { username: "csong202", password: "mongoDB123" },
   })
-  .then(function (result) {
+  .then(function (_result) {
     console.log("Database is connected");
   })
   .catch((err) => console.log(err));
@@ -23,9 +23,8 @@ const PORT = 8080;
 
 app.use(cors());
 
-// app.get("/", (req, res) => res.send("INSTRUCTIONS\n\nCreating Inventory Items\npath = \n\nEditing Inventory Items\npath = /projects/edit/<id>\n\nDeleting Inventory Items\npath = /projects/delete/<id>\n\nViewing a List of Inventory Items\npath = /projects/"));
-app.get("/", (req, res) => {
-  res.sendFile("index.html", {root: __dirname})
+app.get("/", (_req, res) => {
+  res.sendFile("instructions.html", { root: __dirname });
 });
 app.listen(PORT, () =>
   console.log(`Server running on port: http://localhost:${PORT}`)
